@@ -56,7 +56,7 @@ collate_fn = DataCollate(tacotron_params['number_frames_step'])
 # https://jdhao.github.io/2017/10/23/pytorch-load-data-and-make-batch/
 
 train_sampler = DistributedSampler(train_data) if tacotron_params['distributed_run'] else None
-val_sampler = DistributedSampler(valset) if distributed_run else None
+val_sampler = DistributedSampler(valset) if tacotron_params['distributed_run'] else None
 
 train_loader = DataLoader(train_data, num_workers=1, shuffle=False, sampler=train_sampler,
                           batch_size=tacotron_params['batch_size'], pin_memory=False, drop_last=True,
